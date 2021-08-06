@@ -3,9 +3,9 @@
 
 
 class ListNode:
-    def __init__(self, x):
+    def __init__(self, x, _next=None):
         self.val = x
-        self.next = None
+        self.next = _next
 
 
 def print_link_table(head):
