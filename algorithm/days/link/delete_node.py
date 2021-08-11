@@ -31,17 +31,43 @@ def delete_indict_node_priority(head, indict_node):
     return head
 
 
+# 删除倒数第N个节点
+def removeNthFromEnd(head, n):
+    if head.next is None:
+        return None
+
+    fast = head
+    low = head
+
+    while fast.next is not None and n:
+        fast = fast.next
+        n -= 1
+
+    if n == 1:
+        return low.next
+
+    while fast.next:
+        fast = fast.next
+        low = low.next
+
+    low.next = low.next.next
+    return head
+
+
 if __name__ == '__main__':
     node4 = ListNode(1)
     node3 = ListNode(2, node4)
     node2 = ListNode(3, node3)
     node1 = ListNode(4, node2)
 
-    print_link_table(node1)
-    # head_node = delete_indict_node(node1, node3)
-    head_node = delete_indict_node_priority(node1, node3)
-    print_link_table(head_node)
+    # print_link_table(node1)
+    # # head_node = delete_indict_node(node1, node3)
+    # head_node = delete_indict_node_priority(node1, node3)
+    # print_link_table(head_node)
 
     print("+++++++++++++++++++++++")
+    print_link_table(node1)
+    head = removeNthFromEnd(node1, 4)
+    print_link_table(head)
 
 
