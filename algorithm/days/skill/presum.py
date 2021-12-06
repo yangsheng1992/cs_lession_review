@@ -66,6 +66,36 @@ def sub_array_sum_priority(arrays, k):
     return ans
 
 
+def pre_sum_matrix(matrix):
+    """
+    二维矩阵中的前缀和
+    这道题让你计算二维矩阵中子矩阵的元素之和
+    :return: leetcode 304
+    """
+
+    def num_matrix():
+        m, n = len(matrix), len(matrix[0])
+        preSum = [[0] * (m+1) for i in range(n+1)]
+
+        for i in range(1, m+1):
+            for j in range(1, n+1):
+                preSum[i][j] = preSum[i-1][j] + preSum[i][j-1] + matrix[i-1][j-1] - preSum[i-1][j-1]
+
+        print(preSum)
+        return preSum
+
+    def sum_region(x1, x2, y1, y2, preSum):
+        return preSum[x2+1][y2+1] - preSum[x1][y2+1] - preSum[x2+1][y1] + preSum[x1][y1]
+
+    print(sum_region(1, 2, 1, 2, num_matrix()))
+
+
 if __name__ == '__main__':
-    results = sub_array_sum_priority([3, 5, 2, -2, 4, 1], 5)
-    print(results)
+    # results = sub_array_sum_priority([3, 5, 2, -2, 4, 1], 5)
+    # print(results)
+    pre_sum_matrix(
+        [[1, 2, 3],
+         [4, 5, 6],
+         [7, 8, 9]
+         ]
+    )
